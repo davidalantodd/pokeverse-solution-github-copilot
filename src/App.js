@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import debounce from 'lodash.debounce'; // import debounce library
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import FormControl from 'react-bootstrap/FormControl';
@@ -13,6 +14,12 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [search, setSearch] = useState('');
+
+  // Debounce the search input to limit the rate of state updates
+  const debouncedSetSearch = useCallback(
+    debounce((value) => setSearch(value), 300),
+    []
+  );
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=150')
@@ -33,6 +40,10 @@ function App() {
     );
   }, [search, pokemonList]);
 
+  const handleChange = (event) => {
+    debouncedSetSearch(event.target.value); //call the new debouncedSetSearch function
+  };
+
   return (
     <div data-testid="app">
       <FavoritesProvider>
@@ -47,7 +58,7 @@ function App() {
                   value={search}
                   aria-label='search'
                   aria-describedby='search'
-                  onChange={(e) => setSearch(e.target.value)}
+                  onChange={handleChange} // hange this onChange to call the new function
                 />
               </InputGroup>
             </Col>
