@@ -3,7 +3,7 @@ import React from 'react';
 import { act, render, screen, fireEvent } from '@testing-library/react';
 import { PokemonCard } from '../src/components/PokemonCard';
 import { FavoritesProvider } from '../src/FavoritesProvider';
-import { MOCK_ONE_POKEMON_DATA } from '../mocks/mockPokemonData';
+import { MOCK_ONE_POKEMON_DATA, MOCK_151_POKEMON_DATA } from '../mocks/mockPokemonData';
 const initialFetch = window.fetch;
 
 

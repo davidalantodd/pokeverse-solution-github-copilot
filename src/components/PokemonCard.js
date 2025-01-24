@@ -3,19 +3,26 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { FavoritesContext } from '../FavoritesProvider';
 
+const cache = {};   // implementing cache to store individual pokemon data
+
 function PokemonCard({ url, name }) {
   const [pokemon, setPokemon] = useState(null);
   const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setPokemon(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (cache[url]){
+      setPokemon(cache[url]); // checking for cached result
+    } else { // if it hasn't been cached, fetch the data
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          cache[url] = data // storing fetched data in cache
+          setPokemon(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }, [url]);
 
   return (

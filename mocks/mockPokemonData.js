@@ -59,7 +59,7 @@ export const MOCK_POKEMON_DATA = {
     "weight": 69
   }
 
-  export const MOCK_151_POKEMON_DATA_  = {
+  export const MOCK_151_POKEMON_DATA  = {
     "count": 1302,
     "next": "https://pokeapi.co/api/v2/pokemon?offset=151&limit=151",
     "previous": null,

@@ -2,7 +2,7 @@
 import React from 'react';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { App } from '../src/App';
-import { MOCK_POKEMON_DATA } from '../mocks/mockPokemonData';
+import { MOCK_POKEMON_DATA, MOCK_151_POKEMON_DATA } from '../mocks/mockPokemonData';
 const initialFetch = window.fetch;
 
 jest.mock("../src/components/PokemonCard", () => ({
@@ -17,7 +17,7 @@ describe('App', () => {
     window.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
         json: () =>
-          Promise.resolve(MOCK_POKEMON_DATA),
+          Promise.resolve(MOCK_151_POKEMON_DATA),
       })
     );
   });
@@ -34,7 +34,7 @@ describe('App', () => {
 
     expect(appContainer).toBeInTheDocument();
     expect(screen.getByText('All Pokemon')).toBeInTheDocument();
-    expect(screen.getAllByTestId('PokemonCard').length).toEqual(5);
+    expect(screen.getAllByTestId('PokemonCard').length).toEqual(151);
   });
 
   it('should search and filter', async () => {
@@ -45,7 +45,7 @@ describe('App', () => {
     expect(input.value).toBe('');
     fireEvent.change(input, {target: {value: 'ch'}})
     expect(input.value).toBe('ch');
-    expect(screen.getAllByTestId('PokemonCard').length).toEqual(2);
+    expect(screen.getAllByTestId('PokemonCard').length).toEqual(11);
   })
 
 });
