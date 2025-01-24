@@ -48,7 +48,7 @@ describe('PokemonCard', () => {
         fireEvent.click(favoriteToggle)
   })
 
-  it('Should render multiple times', async () => {
+  it('Should render the same Pokemon Card multiple times', async () => {
     for (let i = 0; i < 100; i++){
       await act(async () => {
         render(
