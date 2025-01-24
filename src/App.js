@@ -14,10 +14,11 @@ function App() {
   const [pokemonList, setPokemonList] = useState([]);
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [search, setSearch] = useState('');
+  const [input, setInput] = useState(''); // create new state to protect against lag for users
 
   // Debounce the search input to limit the rate of state updates
   const debouncedSetSearch = useCallback(
-    debounce((value) => setSearch(value), 300),
+    debounce((value) => setSearch(value), 200),
     []
   );
 
@@ -40,8 +41,9 @@ function App() {
     );
   }, [search, pokemonList]);
 
-  const handleChange = (event) => {
-    debouncedSetSearch(event.target.value); //call the new debouncedSetSearch function
+  const handleChange = (event) => { // update both states here
+    setInput(event.target.value);
+    debouncedSetSearch(event.target.value);
   };
 
   return (
@@ -55,10 +57,10 @@ function App() {
               <InputGroup>
                 <InputGroup.Text id='search'>Search</InputGroup.Text>
                 <FormControl
-                  value={search}
+                  value={input}
                   aria-label='search'
                   aria-describedby='search'
-                  onChange={handleChange} // hange this onChange to call the new function
+                  onChange={handleChange} // change this onChange to call the new function
                 />
               </InputGroup>
             </Col>

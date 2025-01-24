@@ -1,6 +1,6 @@
 /** @jest-environment jsdom */
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor} from '@testing-library/react';
 import { App } from '../src/App';
 import { MOCK_POKEMON_DATA, MOCK_151_POKEMON_DATA } from '../mocks/mockPokemonData';
 const initialFetch = window.fetch;
@@ -45,7 +45,9 @@ describe('App', () => {
     expect(input.value).toBe('');
     fireEvent.change(input, {target: {value: 'ch'}})
     expect(input.value).toBe('ch');
-    expect(screen.getAllByTestId('PokemonCard').length).toEqual(11);
+    await waitFor(() => {
+      expect(screen.getAllByTestId('PokemonCard').length).toEqual(11);
+    })
   })
 
 });
