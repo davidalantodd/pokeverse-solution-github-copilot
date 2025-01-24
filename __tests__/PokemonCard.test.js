@@ -48,4 +48,17 @@ describe('PokemonCard', () => {
         fireEvent.click(favoriteToggle)
   })
 
+  it('Should render multiple times', async () => {
+    for (let i = 0; i < 100; i++){
+      await act(async () => {
+        render(
+          <FavoritesProvider>
+              <PokemonCard name={MOCK_ONE_POKEMON_DATA.species.name} url={MOCK_ONE_POKEMON_DATA.species.url} />
+          </FavoritesProvider>
+        );
+      });
+    }
+    
+  });
+
 });
