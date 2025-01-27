@@ -28,6 +28,15 @@ Pokemon Wiki
   npm run lint
   ```
 
+## Optimizations using GitHub Copilot
+
+This branch of the repo (#week-4-github-copilot-refactor)  was refactored using GitHub Copilot. The following optimizations were made:
+- Implemented a caching mechanism in `PokemonCard.js` to store fetched data and reuse it if available.
+- Debounced the search input in `App.js` to limit the rate at which the search state is updated.
+
+You can view the full write-up on this [Project Documentation repo](https://github.com/davidalantodd/project-1-github-copilot).
+
+
 ---
 
 > Made with ♥️
